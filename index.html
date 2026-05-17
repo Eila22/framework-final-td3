@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi sitio web</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Rozha+One&display=swap" rel="stylesheet">
+</head>
+
+<body id="home">
+    <nav>
+        <a href="seccion1.html">Mejores Destinos</a>
+        <a href="seccion2.html">Sabores del Mundo</a>
+        <a href="seccion3.html">Night Vibes</a>
+        <a href="seccion4.html">Esenciales para tu viaje</a>
+        <a href="seccion3.html">Viajar para sentir</a>
+    </nav>
+
+    <div id="bloqueconfoto">
+        <h1>Bon Voyage</h1>
+        <h2>Viajar es descubrir</h2>
+    </div>
+
+   <div id="bloqueblanco-home">
+    <img src="2026.png">
+    <p>Viajar es descubrir el mundo desde nuevas miradas. No se trata solo de llegar a un destino, sino de conectar con su esencia, su cultura y dejarse sorprender. Entre paisajes que parecen irreales, ciudades que mezclan historia y modernidad, el viaje se convierte en una experiencia personal. Esta revista nace como un espacio para inspirar y explorar. Un lugar donde cada página invita a planear y a soñar con todo lo que aún queda por descubrir en este mundo.</p>
+</div>
+
+    <div class="carrusel-container">
+        <h3>Inspiración para tu próximo viaje</h3>
+
+        <div class="carrusel">
+            <button class="flecha izquierda" id="prevBtn">❮</button>
+
+            <div class="carrusel-contenido">
+                <div class="carrusel-imagen">
+                    <img id="carruselImg" src="japancopy.jpg" alt="Imagen del carrusel">
+                </div>
+                <p class="pais-nombre" id="paisNombre">Japón</p>
+            </div>
+
+            <button class="flecha derecha" id="nextBtn">❯</button>
+        </div>
+
+        <div class="descarga-pdf">
+            <a href="libro.pdf">Descargar revista en PDF</a>
+        </div>
+
+        <footer class="creditos">
+            <p>2026 - © Realizado por Eileen Vanessa Rincón Cerquera</p>
+        </footer>
+    </div>
+
+    <script>
+        const destinos = [
+            { imagen: "japancopy.jpg", pais: "Japón" },
+            { imagen: "Italiacopy.jpg", pais: "Italia" },
+            { imagen: "CostaRicaCopy.jpg", pais: "Costa Rica" }
+        ];
+
+        let indiceActual = 0;
+        let animando = false;
+
+        const imgElement = document.getElementById("carruselImg");
+        const paisNombre = document.getElementById("paisNombre");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        function animarBoton(boton) {
+            boton.classList.add("click-flecha");
+
+            setTimeout(() => {
+                boton.classList.remove("click-flecha");
+            }, 350);
+        }
+
+        function cambiarImagen(direccion, boton) {
+            if (animando) return;
+
+            animando = true;
+            animarBoton(boton);
+
+            if (direccion === "siguiente") {
+                indiceActual = (indiceActual + 1) % destinos.length;
+                imgElement.classList.add("salir-izquierda");
+            } else {
+                indiceActual = (indiceActual - 1 + destinos.length) % destinos.length;
+                imgElement.classList.add("salir-derecha");
+            }
+
+            paisNombre.classList.add("cambiando");
+
+            setTimeout(() => {
+                imgElement.src = destinos[indiceActual].imagen;
+                paisNombre.textContent = destinos[indiceActual].pais;
+                imgElement.classList.remove("salir-izquierda", "salir-derecha");
+                paisNombre.classList.remove("cambiando");
+
+                imgElement.classList.add(direccion === "siguiente" ? "entrar-derecha" : "entrar-izquierda");
+            }, 230);
+
+            setTimeout(() => {
+                imgElement.classList.remove("entrar-derecha", "entrar-izquierda");
+                animando = false;
+            }, 620);
+        }
+
+        prevBtn.addEventListener("click", () => cambiarImagen("anterior", prevBtn));
+        nextBtn.addEventListener("click", () => cambiarImagen("siguiente", nextBtn));
+    </script>
+</body>
+</html>

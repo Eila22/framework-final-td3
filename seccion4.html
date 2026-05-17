@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esenciales para tu viaje</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+</head>
+
+<body id="sec4">
+    <main>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="seccion1.html">Mejores Destinos</a>
+            <a href="seccion2.html">Sabores del Mundo</a>
+            <a href="seccion3.html">Night Vibes</a>
+            <a href="seccion4.html">Esenciales para tu viaje</a>
+        </nav>
+
+        <header>
+            <h1>Lo que no puede faltar</h1>
+            <h2>Esenciales para tu viaje</h2>
+        </header>
+
+ <div id="bloqueblanco-home">
+    <img src="Aeropuerto.jpg">
+    <p> Viajar no solo se trata del destino, sino también de todo lo que llevamos para disfrutar la experiencia de la mejor manera. Desde accesorios prácticos hasta objetos que hacen el recorrido más cómodo, organizado y seguro, cada detalle puede marcar la diferencia durante el viaje. Prepararse bien permite disfrutar cada momento con más tranquilidad y aprovechar al máximo cada aventura.
+</p>
+</div>
+
+<div class="carrusel-container">
+        <h3>Empaca para tu viaje</h3>
+
+        <div class="carrusel">
+            <button class="flecha izquierda" id="prevBtn">❮</button>
+
+            <div class="carrusel-contenido">
+                <div class="carrusel-imagen carrusel-imagen-sec4">
+    <img id="carruselImg" src="pasaporte.jpg" alt="Imagen del carrusel">
+</div>
+                <p class="pais-nombre" id="paisNombre">Pasaporte y Documentos</p>
+            </div>
+
+            <button class="flecha derecha" id="nextBtn">❯</button>
+        </div>
+
+        
+
+
+        <footer class="creditos">
+            <p>2026 - © Realizado por Eileen Vanessa Rincón Cerquera</p>
+        </footer>
+
+<script>
+       const destinos = [
+    { imagen: "pasaporte.jpg", pais: "Pasaporte y Documentos" },
+    { imagen: "hoodie.jpg", pais: "Hoodie" },
+    { imagen: "Audifonos.jpg", pais: "Audifonos" },
+    { imagen: "cargador.jpg", pais: "Bateria recargable" },
+    { imagen: "Termo.jpg", pais: "Termo" },
+    { imagen: "Necer.jpg", pais: "Neceser" }
+];
+
+        let indiceActual = 0;
+        let animando = false;
+
+        const imgElement = document.getElementById("carruselImg");
+        const paisNombre = document.getElementById("paisNombre");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        function animarBoton(boton) {
+            boton.classList.add("click-flecha");
+
+            setTimeout(() => {
+                boton.classList.remove("click-flecha");
+            }, 350);
+        }
+
+        function cambiarImagen(direccion, boton) {
+            if (animando) return;
+
+            animando = true;
+            animarBoton(boton);
+
+            if (direccion === "siguiente") {
+                indiceActual = (indiceActual + 1) % destinos.length;
+                imgElement.classList.add("salir-izquierda");
+            } else {
+                indiceActual = (indiceActual - 1 + destinos.length) % destinos.length;
+                imgElement.classList.add("salir-derecha");
+            }
+
+            paisNombre.classList.add("cambiando");
+
+            setTimeout(() => {
+                imgElement.src = destinos[indiceActual].imagen;
+                paisNombre.textContent = destinos[indiceActual].pais;
+                imgElement.classList.remove("salir-izquierda", "salir-derecha");
+                paisNombre.classList.remove("cambiando");
+
+                imgElement.classList.add(direccion === "siguiente" ? "entrar-derecha" : "entrar-izquierda");
+            }, 230);
+
+            setTimeout(() => {
+                imgElement.classList.remove("entrar-derecha", "entrar-izquierda");
+                animando = false;
+            }, 620);
+        }
+
+        prevBtn.addEventListener("click", () => cambiarImagen("anterior", prevBtn));
+        nextBtn.addEventListener("click", () => cambiarImagen("siguiente", nextBtn));
+    </script>
+
+
+    </main>
+</body>
+</html>

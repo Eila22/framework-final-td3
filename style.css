@@ -1,0 +1,811 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 100%;
+}
+
+html {
+    background-color: #f5f5f5;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url("Fondo 2.jpg");
+    background-size: cover;
+    color: white;
+    background-position: center bottom;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: "Rozha One", serif;
+    font-size: 170pt;
+    text-align: center;
+}
+
+h2 {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 24pt;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 2%;
+}
+
+nav a {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 12pt;
+    padding: 1% 3%;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    margin: 10px;
+    border-radius: 12px;
+}
+
+#bloqueconfoto {
+    background-image: url("Fondo 2.jpg");
+    background-size: cover;
+    background-position: center center;
+    padding: 10% 5%;
+}
+
+#bloqueblanco {
+    background-color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: row;       /* ← imagen y texto lado a lado */
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+#bloqueblanco img {
+    width: 45%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+#bloqueblanco p {
+    flex: 1;
+    font-family: "IBM Plex Serif", serif;
+    font-size: 16pt;
+    color: black;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.carrusel-container {
+    background-color: #ffffff;
+    padding: 40px 20px 0;
+    text-align: center;
+    margin-top: -280px;
+    margin-bottom: -100px;
+    flex: 1;
+}
+
+.carrusel-container h3 {
+    font-family: "Rozha One", serif;
+    font-size: 32pt;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.carrusel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: -20px;
+    background-color: transparent;
+}
+
+.carrusel-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.carrusel-imagen {
+    width: 500px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+}
+
+.carrusel-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.pais-nombre {
+    min-height: 42px;
+    font-family: "IBM Plex Serif", serif;
+    font-size: 24pt;
+    font-weight: 600;
+    color: #29383b;
+    letter-spacing: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.pais-nombre.cambiando {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.descarga-pdf {
+    width: calc(100% + 40px);
+    background-color: #29383b;
+    padding: 50px 20px;
+    margin: 35px 0 0 -20px;
+    text-align: center;
+}
+
+.descarga-pdf a {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 18pt;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.descarga-pdf a:hover {
+    text-decoration: underline;
+}
+
+.creditos {
+    width: calc(100% + 40px);
+    background-color: #29383b;
+    padding: 22px 20px;
+    margin: 0 0 0 -20px;
+    text-align: center;
+}
+
+.creditos p {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 12pt;
+    color: white;
+}
+
+.flecha {
+    width: 58px;
+    height: 58px;
+    background-color: #29383b;
+    color: white;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.flecha:hover {
+    background-color: #2f6f73;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(47, 111, 115, 0.35);
+}
+
+.flecha:active {
+    transform: translateY(0) scale(0.92);
+    background-color: #1f5357;
+}
+
+.flecha.click-flecha {
+    animation: pulsoFlecha 0.35s ease;
+}
+
+.carrusel-imagen img.salir-izquierda {
+    animation: salirIzquierda 0.25s ease forwards;
+}
+
+.carrusel-imagen img.salir-derecha {
+    animation: salirDerecha 0.25s ease forwards;
+}
+
+.carrusel-imagen img.entrar-derecha {
+    animation: entrarDerecha 0.4s ease forwards;
+}
+
+.carrusel-imagen img.entrar-izquierda {
+    animation: entrarIzquierda 0.4s ease forwards;
+}
+
+/* SECCIONES INTERNAS */
+
+#sec1,
+#sec2,
+#sec3,
+#sec4 {
+    min-height: 100vh;
+    background-image: none;
+    background-color: white;
+    color: white;
+}
+
+#sec1 main,
+#sec2 main,
+#sec3 main,
+#sec4 main {
+    min-height: 100vh;
+    background-image: url("Fondo 2.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+}
+
+#sec1 nav,
+#sec2 nav,
+#sec3 nav,
+#sec4 nav {
+    min-height: 120px;
+    gap: 35px;
+    padding: 28px 20px;
+}
+
+#sec1 nav a,
+#sec2 nav a,
+#sec3 nav a,
+#sec4 nav a {
+    padding: 10px 22px;
+    margin: 0;
+}
+
+#sec1 nav a:hover,
+#sec2 nav a:hover,
+#sec3 nav a:hover,
+#sec4 nav a:hover {
+    background-color: #29383b;
+    color: white;
+    transform: translateY(-3px);
+}
+
+#sec1 header,
+#sec2 header,
+#sec3 header,
+#sec4 header {
+    flex: 1;
+    min-height: 620px;
+    background-image: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 5%;
+}
+
+#sec1 h1,
+#sec2 h1,
+#sec3 h1,
+#sec4 h1 {
+    font-family: "Rozha One", serif;
+    font-size: 145pt;
+    color: white;
+    line-height: 0.9;
+}
+
+#sec1 h2,
+#sec2 h2,
+#sec3 h2,
+#sec4 h2 {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 24pt;
+    color: white;
+    margin-top: 35px;
+}
+
+#sec1 .creditos,
+#sec2 .creditos,
+#sec3 .creditos,
+#sec4 .creditos {
+    width: 100%;
+    margin: 0;
+}
+
+/* RESTAURANTES - SECCION 2 */
+
+.sabores-intro {
+    background-color: #f4efe5;
+    padding: 60px 8%;
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.sabores-intro img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.sabores-intro p {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 18pt;
+    line-height: 1.45;
+    color: #4c4c4c;
+    text-align: justify;
+}
+
+.restaurantes {
+    background-color: #14292d;
+    background-image: linear-gradient(rgba(20, 41, 45, 0.92), rgba(20, 41, 45, 0.92)), url("Fondo 2.jpg");
+    background-size: cover;
+    background-position: center center;
+    padding: 80px 8% 100px;
+}
+
+.restaurantes-titulo {
+    max-width: 1100px;
+    margin: 0 auto 50px;
+}
+
+.restaurantes-titulo h2 {
+    font-family: "Rozha One", serif;
+    font-size: 78pt;
+    line-height: 0.9;
+    color: white;
+    text-align: left;
+    text-shadow: 3px 3px 0 #2d7fb2;
+}
+
+.restaurantes-titulo p {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 20pt;
+    font-style: italic;
+    color: white;
+    margin-top: 12px;
+}
+
+.restaurante-item {
+    max-width: 1100px;
+    margin: 0 auto 70px;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    align-items: center;
+    gap: 55px;
+}
+
+.restaurante-item.invertido {
+    grid-template-columns: 1fr 380px;
+}
+
+.restaurante-imagen {
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    padding: 12px;
+    border: 2px solid #bce6ff;
+    box-shadow: 0 0 0 14px rgba(188, 230, 255, 0.22), 0 0 0 20px rgba(188, 230, 255, 0.12);
+    overflow: hidden;
+}
+
+.restaurante-imagen img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.restaurante-texto {
+    position: relative;
+    color: white;
+}
+
+/* LÍNEA PEGADA AL H3 - junto al título, como las rojas */
+.restaurante-texto h3 {
+    font-family: "Rozha One", serif;
+    font-size: 58pt;
+    color: white;
+    line-height: 0.9;
+    text-shadow: 3px 3px 0 #2d7fb2;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    white-space: nowrap;
+}
+
+.restaurante-texto h3::after {
+    content: "";
+    display: inline-block;
+    width: 210px;
+    height: 4px;
+    background-color: white;
+    flex-shrink: 0;
+}
+
+/* En los invertidos (Ikoyi y CieL) la línea va a la IZQUIERDA del título */
+.restaurante-item.invertido .restaurante-texto h3 {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.restaurante-texto p {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 20pt;
+    line-height: 1.25;
+    margin-top: 20px;
+    max-width: 610px;
+}
+
+.restaurante-item:last-child {
+    margin-bottom: 0;
+}
+
+/* ANIMACIONES */
+
+@keyframes salirIzquierda {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-80px) scale(0.96);
+    }
+}
+
+@keyframes salirDerecha {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(80px) scale(0.96);
+    }
+}
+
+@keyframes entrarDerecha {
+    from {
+        opacity: 0;
+        transform: translateX(80px) scale(1.03);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes entrarIzquierda {
+    from {
+        opacity: 0;
+        transform: translateX(-80px) scale(1.03);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes pulsoFlecha {
+    0% {
+        box-shadow: 0 0 0 0 rgba(47, 111, 115, 0.45);
+    }
+
+    100% {
+        box-shadow: 0 0 0 14px rgba(47, 111, 115, 0);
+    }
+}
+
+
+
+/* ------------------------------------- */
+/* SECCIÓN NUEVA: PAÍS */
+/* ------------------------------------- */
+
+.seccion-pais {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 80px 40px 160px;  /* ← más padding abajo */
+    min-height: 90vh;           /* ← altura mínima del 90% de la pantalla */
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Título grande centrado */
+.pais-titulo {
+    font-family: "Rozha One", serif;
+    font-size: 72px;
+    text-align: center;
+    color: #000000;   /* ← asegúrate que sea negro, no blanco */
+    margin-bottom: 30px;
+}
+
+/* Imagen horizontal grande */
+.pais-imagen-principal {
+    width: 100%;
+    margin-bottom: 30px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.pais-imagen-principal img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Subtítulo centrado */
+.pais-subtitulo {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 28px;
+    text-align: center;
+    color: #000000;   /* ← mismo aquí */
+    margin-bottom: 50px;
+    font-weight: 400;
+}
+/* Contenido doble: texto izquierda + imagen derecha */
+.pais-contenido-doble {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 70px;
+    flex-wrap: wrap;
+}
+
+.pais-texto {
+    flex: 1;
+    font-family: "IBM Plex Serif", serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #ffffff;
+    text-align: justify;
+}
+
+.pais-texto p {
+    margin-bottom: 20px;
+}
+
+.pais-imagen {
+    flex: 1;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.pais-imagen img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Carrusel horizontal centrado */
+.carrusel-horizontal {
+    margin-top: 40px;
+    text-align: center; /* Centra el título */
+}
+
+.carrusel-horizontal-titulo {
+    font-family: "Rozha One", serif;
+    font-size: 36px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Contenedor centrado con ancho fijo y margen automático */
+.carrusel-horizontal-contenedor {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    padding: 20px 10px;
+    scroll-snap-type: x mandatory;
+    max-width: 1000px;        /* Ancho máximo del carrusel */
+    margin: 0 auto;           /* Centra el contenedor */
+    justify-content: center;  /* Centra las tarjetas si no llenan el ancho */
+}
+
+/* Para que las tarjetas no se estiren de más */
+.tarjeta-horizontal {
+    flex: 0 0 280px;
+    scroll-snap-align: center; /* Centra cada tarjeta al hacer scroll */
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.tarjeta-horizontal:hover {
+    transform: translateY(-10px);
+}
+
+.carrusel-horizontal-titulo {
+    font-family: "Rozha One", serif;
+    font-size: 36px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+.carrusel-horizontal-contenedor {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    padding: 20px 10px;
+    scroll-snap-type: x mandatory;
+}
+
+.carrusel-horizontal-contenedor::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carrusel-horizontal-contenedor::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.carrusel-horizontal-contenedor::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 10px;
+}
+
+/* Tarjetas del carrusel horizontal */
+.tarjeta-horizontal {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.tarjeta-horizontal:hover {
+    transform: translateY(-10px);
+}
+
+.tarjeta-horizontal img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.tarjeta-horizontal h4 {
+    font-family: "Rozha One", serif;
+    font-size: 22px;
+    text-align: center;
+    margin: 15px 0 10px;
+    color: #000000;
+}
+
+.tarjeta-horizontal p {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 14px;
+    text-align: center;
+    padding: 0 15px 20px;
+    color: #000000;
+    line-height: 1.5;
+}
+
+.bloque-final {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bloque-final img {
+    width: 100%;          /* ← imagen horizontal a lo largo */
+    height: 200px;        /* ← altura que quieras */
+    object-fit: cover;    /* ← recorta sin deformar */
+    border-radius: 20px;
+}
+
+.bloque-final p {
+    font-family: "IBM Plex Serif", serif;
+    font-size: 16pt;
+    color: black;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.pais-titulo {
+    color: #000000 !important;
+}
+
+.pais-subtitulo {
+    color: #000000 !important;
+}
+
+.carrusel-horizontal-titulo {
+    color: #000000 !important;
+}
+
+.pais-titulo {
+    color: #000000 !important;
+}
+
+.pais-subtitulo {
+    color: #000000 !important;
+}
+
+.carrusel-horizontal-titulo {
+    color: #000000 !important;
+}
+
+#bloqueblanco {
+    background-color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;    /* ← elementos en columna, uno debajo del otro */
+    align-items: center;       /* ← centra todo horizontalmente */
+    gap: 30px;
+    margin-top: -50px;
+}
+
+#bloqueblanco-home {
+    background-color: white;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: row;       /* ← imagen izquierda, texto derecha */
+    align-items: center;
+    gap: 40px;
+}
+
+#bloqueblanco-home img {
+    width: 45%;
+    height: auto;
+    flex-shrink: 0;
+}
+
+#bloqueblanco-home p {
+    flex: 1;
+    font-family: "IBM Plex Serif", serif;
+    font-size: 16pt;
+    color: black;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.carrusel-imagen-sec4 {
+    width: 450px;
+    height: 320px;
+    background-color: #ffffff;  /* ← fondo suave para las que tienen fondo blanco */
+}
+
+.carrusel-imagen-sec4 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* ← contain en vez de cover para que no se recorte */
+    border-radius: 20px;
+    padding: 20px;         /* ← espacio alrededor de la imagen */
+}
+
+.carrusel-imagen-sec4 {
+    width: 450px;
+    height: 320px;
+}
+
